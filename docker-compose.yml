@@ -1,0 +1,42 @@
+
+version: "3.9"
+
+services:
+  # -------------------------------------------------
+  # Lightweight MariaDB (Alpine)
+  # -------------------------------------------------
+  db:
+    image: yobasystems/alpine-mariadb:11.4.8
+    container_name: mariadb_alpine
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: secretRootPwd
+      MYSQL_DATABASE: inventorydb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: appUserPwd
+    volumes:
+      - db_data:/var/lib/mysql        # persistent storage
+    ports:
+      - "3307:3306"                   # optional – expose to host
+
+  # -------------------------------------------------
+  # phpMyAdmin
+  # -------------------------------------------------
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: appuser
+      PMA_PASSWORD: appUserPwd
+      PMA_ABSOLUTE_URI: http://localhost:8080/
+    ports:
+      - "8080:80"
+    volumes:
+      - /sessions                     # optional – store php sessions outside the container
+
+volumes:
+  db_data:

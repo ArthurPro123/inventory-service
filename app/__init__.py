@@ -1,0 +1,24 @@
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+
+db = SQLAlchemy()
+ma = Marshmallow()
+
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object("config.Config")
+
+    db.init_app(app)
+    ma.init_app(app)
+
+    from app.routes import supplier, warehouse, product, product_variant, inventory
+
+    app.register_blueprint(supplier.bp)
+    app.register_blueprint(warehouse.bp)
+    app.register_blueprint(product.bp)
+    app.register_blueprint(product_variant.bp)
+    app.register_blueprint(inventory.bp)
+
+    return app
