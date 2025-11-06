@@ -3,10 +3,16 @@ from app.models import Inventory
 from app.schemas import InventorySchema
 from app import db
 
+# -----------------------------------------------------------
+from flask_jwt_extended import jwt_required, get_jwt_identity
+# -----------------------------------------------------------
+
+
+
 bp = Blueprint("inventory", __name__, url_prefix="/inventory")
 
-
 @bp.route("/", methods=["GET"])
+@jwt_required()
 def get_inventories():
     inventories = Inventory.query.all()
     return jsonify(InventorySchema(many=True).dump(inventories))

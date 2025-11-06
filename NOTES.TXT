@@ -1,3 +1,32 @@
+1. Login to Get Tokens (access_token and refresh_token):
+
+curl -X POST http://127.0.0.1:5000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "admin@example.com",
+    "password": "SuperSecret123"
+  }'
+
+
+Expected Response
+
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTk5OTk5OSwianRpIjoiYmQ0ZjU0ZDItZjZlNy00ZjQ1LThjNjItYmE3NjQ1YjUwMDAxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwiZXhwIjoxNjk5OTk5OTk5LCJpYXQiOjE2OTk5OTk5OTl9.KaJyFbvL8qQ5Z6X1vL1vL1vL1vL1vL1vL1vL1vL1vL1",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTk5OTk5OSwianRpIjoiYmQ0ZjU0ZDItZjZlNy00ZjQ1LThjNjItYmE3NjQ1YjUwMDAxIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOjEsImV4cCI6MTczMTUzNTk5OX0.2JyFbvL8qQ5Z6X1vL1vL1vL1vL1vL1vL1vL1vL1vL1",
+  "user_id": 1
+}
+
+2. Access a Protected Route
+
+curl -X GET http://127.0.0.1:5000/inventory/ \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTk5OTk5OSwianRpIjoiYmQ0ZjU0ZDItZjZlNy00ZjQ1LThjNjItYmE3NjQ1YjUwMDAxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwiZXhwIjoxNjk5OTk5OTk5LCJpYXQiOjE2OTk5OTk5OTl9.KaJyFbvL8qQ5Z6X1vL1vL1vL1vL1vL1vL1vL1vL1vL1"
+
+3. Refresh the Access Token
+When the access_token expires, use the refresh_token to get a new access_token:
+
+curl -X POST http://127.0.0.1:5000/auth/refresh \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5OTk5OTk5OSwianRpIjoiYmQ0ZjU0ZDItZjZlNy00ZjQ1LThjNjItYmE3NjQ1YjUwMDAxIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOjEsImV4cCI6MTczMTUzNTk5OX0.2JyFbvL8qQ5Z6X1vL1vL1vL1vL1vL1vL1vL1vL1vL1"
+
 
 
 Is It Good Enough?
