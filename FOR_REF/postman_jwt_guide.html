@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman Guide: Automating Flask JWT Workflow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ff6b6b;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #4dabf7;
+            margin-top: 20px;
+        }
+        h3 {
+            color: #51cf66;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        ul, ol {
+            margin-left: 20px;
+        }
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0;
+        }
+        .tip {
+            background: #d4edda;
+            padding: 10px;
+            border-left: 4px solid #28a745;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Postman Guide: Automating Flask JWT Workflow</h1>
+
+    <p>
+        This guide explains how to automate the process of logging in, refreshing tokens, and accessing protected routes in your Flask API using Postman.
+    </p>
+
+    <h2>Prerequisites</h2>
+    <ul>
+        <li>Postman installed on your machine.</li>
+        <li>Your Flask API running locally (e.g., <code>http://127.0.0.1:5000</code>).</li>
+        <li>A user account in your database (e.g., <code>admin@example.com</code> with password <code>SuperSecret123</code>).</li>
+    </ul>
+
+    <h2>Step 1: Create a Postman Environment</h2>
+    <p>
+        Postman environments allow you to store variables (like tokens) that can be reused across 
