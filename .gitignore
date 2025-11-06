@@ -1,3 +1,5 @@
+NOTES.TXT
+
 venv/
 __pycache__/
 *.pyc
