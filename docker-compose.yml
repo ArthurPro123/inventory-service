@@ -16,6 +16,7 @@ services:
       MYSQL_PASSWORD: appUserPwd
     volumes:
       - db_data:/var/lib/mysql        # persistent storage
+      - ./inventory.sql:/docker-entrypoint-initdb.d/inventory.sql
     ports:
       - "3307:3306"                   # optional – expose to host
 
@@ -36,7 +37,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - /sessions                     # optional – store php sessions outside the container
+      # - /sessions                     # optional – store php sessions outside the container
 
 volumes:
   db_data:
