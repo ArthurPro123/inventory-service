@@ -13,8 +13,10 @@ def create_app():
     db.init_app(app)
     ma.init_app(app)
 
-    from app.routes import supplier, warehouse, product, product_variant, inventory
+    # Import and register blueprints:
+    from app.routes import main, supplier, warehouse, product, product_variant, inventory
 
+    app.register_blueprint(main.bp)
     app.register_blueprint(supplier.bp)
     app.register_blueprint(warehouse.bp)
     app.register_blueprint(product.bp)

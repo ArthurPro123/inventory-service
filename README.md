@@ -29,6 +29,13 @@ pip install -r requirements txt
 docker compose up --build
 ```
 
+<!--
+```
+export FLASK_APP=app.py
+flask run
+```
+-->
+
 2. The API will be available at http://localhost:5000.
 
 3. To stop: 
@@ -52,7 +59,6 @@ docker compose down
 |                 | `/product_variant/<id>` | GET, PUT, DELETE | Manage a variant                     |
 | **Inventory**   | `/inventory`            | GET, POST        | List/create inventory items          |
 |                 | `/inventory/<id>`       | GET, PUT, DELETE | Manage an inventory item             |
-| **Query**       | `/inventory/query`      | GET              | Custom inventory report              |
 
 ---
 
