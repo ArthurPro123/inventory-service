@@ -4,7 +4,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY app/          ./app/
+COPY config.py     .
+COPY openapi.json  .
+
 
 # Document the port the container listens on:
 EXPOSE 5000
