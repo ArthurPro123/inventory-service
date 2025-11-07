@@ -148,7 +148,9 @@ CREATE TABLE users (
 ) ENGINE=InnoDB;
 
 
--- Using:
+
+-- Credentials for testing:
+-- ------------------------
 --   email:    admin@example.com,
 --   password: SuperSecret123
 
