@@ -1,19 +1,17 @@
-
 version: "3.9"
 
 services:
   app:
     build: .
     environment:
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
+      DB_NAME:     ${DB_NAME}
+      DB_USER:     ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
-
+      # ---
       DB_PORT: ${DB_PORT}
       DB_HOST: ${DB_HOST}
-      # #
-      # DB_HOST: localhost
-      # DB_PORT: 3307
+    ports:
+      - "5000:5000" # Maps host port 5000 to container port 5000
     depends_on:
       - db
   # -------------------------------------------------
@@ -25,15 +23,8 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD:      ${DB_PASSWORD}
-
-      # #
-      # MYSQL_DATABASE: inventory_db
-      # MYSQL_USER: root
-      # MYSQL_ROOT_PASSWORD: secretRootPwd
-      # MYSQL_PASSWORD:      secretRootPwd
+      MYSQL_USER:     ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
 
     volumes:
       - db_data:/var/lib/mysql        # persistent storage
@@ -51,14 +42,14 @@ services:
     depends_on:
       - db
     environment:
-      PMA_HOST: db  # This should match the service name for MariaDB
-      PMA_USER: appuser
-      PMA_PASSWORD: appUserPwd
+      PMA_HOST:         db  # This should match the service name for MariaDB.
+      PMA_USER:         ${DB_USER}
+      PMA_PASSWORD:     ${DB_PASSWORD}
       PMA_ABSOLUTE_URI: http://localhost:8080/
     ports:
       - "8080:80"
     # volumes:
-      # - /sessions                     # optional – store php sessions outside the container
+      # - /sessions     # optional – store php sessions outside the container
 
 volumes:
   db_data:

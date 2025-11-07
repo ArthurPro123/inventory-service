@@ -4,5 +4,4 @@ flask-marshmallow
 marshmallow-sqlalchemy
 pymysql
 
-
-pip install Flask-JWT-Extended
+Flask-JWT-Extended

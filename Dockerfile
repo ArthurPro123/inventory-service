@@ -6,4 +6,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+# Document the port the container listens on:
+EXPOSE 5000
+
 CMD ["flask", "run", "--host=0.0.0.0"]
