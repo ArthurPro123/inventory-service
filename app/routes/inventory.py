@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import Inventory
+from app.models.inventory import Inventory
 from app.schemas import InventorySchema
 from app import db
 

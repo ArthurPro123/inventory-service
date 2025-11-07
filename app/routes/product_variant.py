@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import ProductVariant
+from app.models.product_variant import ProductVariant
 from app.schemas import ProductVariantSchema
 from app import db
 

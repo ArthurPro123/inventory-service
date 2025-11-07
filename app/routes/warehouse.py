@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models import Warehouse
+from app.models.warehouse import Warehouse
 from app.schemas import WarehouseSchema
 from app import db
 
