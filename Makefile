@@ -19,7 +19,7 @@ ifeq ($(APP_MODE), dev)
     export DB_USER=user1
     export DB_PASSWORD=secretPwd
     export DB_PORT=3307
-    export DB_HOST=localhost
+    export DB_HOST=db
 endif
 
 # ------------------------------------------------
@@ -33,12 +33,13 @@ run: ## Starts db and app services
 	DB_PASSWORD=$(DB_PASSWORD) \
 	DB_PORT=$(DB_PORT) \
 	DB_HOST=$(DB_HOST) \
-	docker-compose -f $(COMPOSE_FILE) up
+	docker-compose -f $(COMPOSE_FILE) up --build
+	# # docker-compose -f $(COMPOSE_FILE) up
 
 .PHONY: stop
 stop: ## Stops services
 	@echo "Stopping services..."
-	@docker-compose -f $(COMPOSE_FILE) down -v
+	@docker-compose -f $(COMPOSE_FILE) down
 
 .PHONY: clean-up
 clean-up: ## Cleans up Docker containers and volumes
@@ -49,5 +50,16 @@ clean-up: ## Cleans up Docker containers and volumes
 	@echo "Cleaning up..."
 	@docker-compose -f $(COMPOSE_FILE) down -v
 
-.PHONY: re-run
+.PHONY: restart
 restart: stop run   ## Restart the stack
+
+# #
+.PHONY: db-logs
+db-logs: 
+	@echo "Getting logs for db"
+	@DB_NAME=$(DB_NAME) \
+	DB_USER=$(DB_USER) \
+	DB_PASSWORD=$(DB_PASSWORD) \
+	DB_PORT=$(DB_PORT) \
+	DB_HOST=$(DB_HOST) \
+	docker-compose logs db

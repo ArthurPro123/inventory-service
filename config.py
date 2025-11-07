@@ -7,3 +7,5 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # #
+    SQLALCHEMY_ECHO = True  # Enable SQLAlchemy echo for debugging

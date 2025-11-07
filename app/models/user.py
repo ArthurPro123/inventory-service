@@ -4,10 +4,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
     """Simple user table used for JWT / OAuth2 authentication."""
-    __tablename__ = "users"
+    __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False, index=True)
-    password_hash = db.Column(db.String(128), nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(32), default="user")   # e.g. "admin", "user"
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 

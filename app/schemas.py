@@ -1,5 +1,5 @@
 from . import ma
-from .models import Supplier, Warehouse, Product, ProductVariant, Inventory
+from .models import Supplier, Warehouse, Product, ProductVariant, Inventory, User
 
 
 class SupplierSchema(ma.SQLAlchemyAutoSchema):
@@ -31,3 +31,9 @@ class InventorySchema(ma.SQLAlchemyAutoSchema):
         model = Inventory
         load_instance = True
         include_fk = True
+
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        load_instance = True

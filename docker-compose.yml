@@ -42,7 +42,7 @@ services:
     depends_on:
       - db
     environment:
-      PMA_HOST:         db  # This should match the service name for MariaDB.
+      PMA_HOST:         ${DB_HOST}  # This should match the service name for MariaDB.
       PMA_USER:         ${DB_USER}
       PMA_PASSWORD:     ${DB_PASSWORD}
       PMA_ABSOLUTE_URI: http://localhost:8080/
