@@ -1,4 +1,4 @@
-app.db
+# # app.db
 Dockerfile_*
 
 venv/
