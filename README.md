@@ -55,23 +55,33 @@ curl -X POST http://localhost:5000/auth/login \
 
 ## API Endpoints
 
-| Resource        | Endpoint                | Methods          | Description                          |
-|-----------------|-------------------------|------------------|--------------------------------------|
-| **Auth**        | `/auth/login`           | POST             | User authentication                  |
-|                 |                         |                  |                                      | 
-| **Suppliers**   | `/supplier`             | GET, POST        | List/create suppliers                |
-|                 | `/supplier/<id>`        | GET, PUT, DELETE | Manage a supplier                    |
-|                 |                         |                  |                                      | 
-| **Warehouses**  | `/warehouse`            | GET, POST        | List/create warehouses               |
-|                 | `/warehouse/<id>`       | GET, PUT, DELETE | Manage a warehouse                   |
-|                 |                         |                  |                                      | 
-| **Products**    | `/product`              | GET, POST        | List/create products                 |
-|                 | `/product/<id>`         | GET, PUT, DELETE | Manage a product                     |
-|                 |                         |                  |                                      | 
-| **Variants**    | `/product_variant`      | GET, POST        | List/create product variants         |
-|                 | `/product_variant/<id>` | GET, PUT, DELETE | Manage a variant                     |
-|                 |                         |                  |                                      | 
-| **Inventory**   | `/inventory`            | GET, POST        | List/create inventory items          |
-|                 | `/inventory/<id>`       | GET, PUT, DELETE | Manage an inventory item             |
-|                 | `/inventory/query`      | GET              | Fetch the detailed inventory data    |
+| Resource         | Endpoint                | Methods          | Description                          |
+|----------------- |-------------------------|------------------|--------------------------------------|
+| **Auth**         | `/auth/login`           | POST             | User authentication                  |
+|                  |                         |                  |                                      | 
+| **Suppliers**    | `/supplier`             | GET, POST        | List/create suppliers                |
+|                  | `/supplier/<id>`        | GET, PUT, DELETE | Manage a supplier                    |
+|                  |                         |                  |                                      | 
+| **Warehouses**   | `/warehouse`            | GET, POST        | List/create warehouses               |
+|                  | `/warehouse/<id>`       | GET, PUT, DELETE | Manage a warehouse                   |
+|                  |                         |                  |                                      | 
+| **Products**     | `/product`              | GET, POST        | List/create products                 |
+|                  | `/product/<id>`         | GET, PUT, DELETE | Manage a product                     |
+|                  |                         |                  |                                      | 
+| **Variants**     | `/product_variant`      | GET, POST        | List/create product variants         |
+|                  | `/product_variant/<id>` | GET, PUT, DELETE | Manage a variant                     |
+|                  |                         |                  |                                      | 
+| **Inventory**    | `/inventory`            | GET, POST        | List/create inventory items          |
+|                  | `/inventory/<id>`       | GET, PUT, DELETE | Manage an inventory item             |
+|                  | `/inventory/query`      | GET              | Fetch the detailed inventory data    |
+|                  |                         |                  |                                      | 
+| **OpenAPI Spec** | `/specs/openapi.json`   | GET              | Access the OpenAPI specification     |
+|                  |                         |                  | for the API                          | 
 
+
+### More on OpenAPI Specification Endpoint
+
+**Purpose**: Provides the full OpenAPI (Swagger) document, detailing every
+route, request/response schemas, authentication methods, and example payloads.
+
+**Usage**: Validating requests against the API contract.
