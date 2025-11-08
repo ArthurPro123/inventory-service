@@ -4,19 +4,12 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your app
 COPY app/          ./app/
 COPY config.py     .
 COPY specs/        ./specs/
 
-# Use SQLite for Render
-ENV FLASK_ENV=production
-ENV DB_HOST=localhost
-ENV DB_NAME=app.db
-ENV DB_USER=
-ENV DB_PASSWORD=
-ENV DB_PORT=
 
+# Document the port the container listens on:
 EXPOSE 5000
-CMD ["flask", "run", "--host=0.0.0.0"]
 
+CMD ["flask", "run", "--host=0.0.0.0"]
