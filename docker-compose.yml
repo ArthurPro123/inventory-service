@@ -30,7 +30,7 @@ services:
       - db_data:/var/lib/mysql        # persistent storage
       - ./inventory.sql:/docker-entrypoint-initdb.d/inventory.sql
     ports:
-      - "${DB_PORT}:3306"
+      - "${DB_EXTERNAL_PORT}:3306"
 
   # -------------------------------------------------
   # phpMyAdmin

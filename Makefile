@@ -18,23 +18,36 @@ ifeq ($(APP_MODE), dev)
     export DB_NAME=inventory_db
     export DB_USER=user1
     export DB_PASSWORD=secretPwd
-    export DB_PORT=3307
+		export DB_PORT=3306
+		export DB_EXTERNAL_PORT=3307
+			#
+			# Can be used to access the db on the local system 
+			# that already runs its own MySQL server.
+	
     export DB_HOST=db
 endif
 
-# ------------------------------------------------
-# ------------------------------------------------
-
-.PHONY: run
-run: ## Starts db and app services
-	@echo "Starting services in $(APP_MODE) mode..."
+COMPOSE = \
 	@DB_NAME=$(DB_NAME) \
 	DB_USER=$(DB_USER) \
 	DB_PASSWORD=$(DB_PASSWORD) \
 	DB_PORT=$(DB_PORT) \
+	DB_EXTERNAL_PORT=$(DB_EXTERNAL_PORT) \
 	DB_HOST=$(DB_HOST) \
-	docker-compose -f $(COMPOSE_FILE) up --build
-	# # docker-compose -f $(COMPOSE_FILE) up
+	docker-compose -f $(COMPOSE_FILE)
+
+# ------------------------------------------------
+# ------------------------------------------------
+
+.PHONY: build
+build: ## Builds services
+	@echo "Building services in $(APP_MODE) mode..."
+	$(COMPOSE) build
+
+.PHONY: run
+run: ## Starts db and app services
+	@echo "Starting services in $(APP_MODE) mode..."
+	$(COMPOSE) up
 
 .PHONY: stop
 stop: ## Stops services
@@ -45,21 +58,14 @@ stop: ## Stops services
 clean-up: ## Cleans up Docker containers and volumes
 # 
 # Stops and removes all containers, networks, and volumes.
-# Useful for a fresh start.
 #
 	@echo "Cleaning up..."
-	@docker-compose -f $(COMPOSE_FILE) down -v
+	$(COMPOSE) down -v
 
 .PHONY: restart
 restart: stop run   ## Restart the stack
 
-# #
 .PHONY: db-logs
 db-logs: 
 	@echo "Getting logs for db"
-	@DB_NAME=$(DB_NAME) \
-	DB_USER=$(DB_USER) \
-	DB_PASSWORD=$(DB_PASSWORD) \
-	DB_PORT=$(DB_PORT) \
-	DB_HOST=$(DB_HOST) \
-	docker-compose logs db
+	$(COMPOSE) logs db
