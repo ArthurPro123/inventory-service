@@ -18,7 +18,7 @@ This project demonstrates a Flask-based REST API for managing inventory, product
 
 1. Clone the Repository
 ```sh
-git clone https://github.com/BrthurPro123/inventory-service.git
+git clone https://github.com/ArthurPro123/inventory-service.git
 cd inventory-service
 ```
 
@@ -46,7 +46,7 @@ make stop
 - Email: `admin@example.com`
 - Password: `SuperSecret123`
 
-### Authentication Example
+#### Authentication Example for Testing
 ```sh
 # Using curl to login
 curl -X POST http://localhost:5000/auth/login \
@@ -73,11 +73,3 @@ curl -X POST http://localhost:5000/auth/login \
 |                 | `/inventory/<id>`       | GET, PUT, DELETE | Manage an inventory item             |
 
 
-
-<!--
-## Testing
-Run the tests with:
-````
-pytest tests/
-```
--->
