@@ -38,6 +38,13 @@ def create_app():
     db.init_app(app)
     ma.init_app(app)
 
+    # #
+    # Create tables if they don't exist
+    with app.app_context():
+        db.create_all()
+
+
+
     # Import and register blueprints:
     from app.routes import main, supplier, warehouse, product, product_variant, inventory
 
