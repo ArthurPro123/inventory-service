@@ -13,9 +13,11 @@ class Config:
 
     else:  # Use SQLite:
 
-        # Ensure the directory exists
-        os.makedirs(os.path.dirname(os.path.abspath(DB_NAME)), exist_ok=True)
-        SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.abspath(DB_NAME)}"
+        # # Ensure the directory exists (not strictly needed for root dir, but good practice)
+        # db_dir = os.path.dirname(os.path.abspath(DB_NAME))
+        # os.makedirs(db_dir, exist_ok=True)
 
+        # Use SQLite
+        SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.abspath(DB_NAME)}"
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False

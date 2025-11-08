@@ -1,3 +1,6 @@
+-- -------------------------------------------------
+-- *** Create Tables ***
+-- -------------------------------------------------
 
 CREATE TABLE supplier (
     id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -62,6 +65,10 @@ CREATE TABLE inventory (
 
 
 -- -------------------------------------------------
+-- *** Insert Initial Data ***
+-- -------------------------------------------------
+
+-- -------------------------------------------------
 -- 1. Suppliers
 -- -------------------------------------------------
 INSERT INTO supplier (name, contact_email, phone, address) VALUES
@@ -116,7 +123,37 @@ VALUES
 
 
 
--- Some Query:
+-- -------------------------------------------------
+-- Add and populate extra table 'user' to support authentication
+-- -------------------------------------------------
+
+CREATE TABLE user (
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    email         VARCHAR(120) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,   -- long enough for Werkzeug hashes
+    role          VARCHAR(32)  DEFAULT 'user',
+    created_at    DATETIME     DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+--
+-- Credentials for testing:
+-- ------------------------
+--   email:    admin@example.com,
+--   password: SuperSecret123
+--
+INSERT INTO user (email, password_hash, role, created_at)
+VALUES (
+    'admin@example.com',
+    'scrypt:32768:8:1$feDrzqGrlFNjoTW9$450dd5b7dcbe9d23f39b041bf7683892e7f4fd113fb07bb00f96a1afb3550067eb5c63b89bffd91727fd09f25db2930abf12a2a63b1995dcfdab16abc77c36d5',
+    'admin',
+    NOW()
+);
+
+
+
+-- -------------------------------------------------
+-- A Query for checking the new database:
+-- -------------------------------------------------
 
 SELECT
     p.sku,
@@ -135,29 +172,3 @@ JOIN warehouse AS w  ON w.id = i.warehouse_id
 JOIN supplier  AS s  ON s.id = i.supplier_id
 ORDER BY p.sku, pv.id, w.code;
 
-
--- ----------------------------
--- ----------------------------
-
-CREATE TABLE user (
-    id            INT AUTO_INCREMENT PRIMARY KEY,
-    email         VARCHAR(120) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,   -- long enough for Werkzeug hashes
-    role          VARCHAR(32)  DEFAULT 'user',
-    created_at    DATETIME     DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
-
-
-
--- Credentials for testing:
--- ------------------------
---   email:    admin@example.com,
---   password: SuperSecret123
-
-INSERT INTO user (email, password_hash, role, created_at)
-VALUES (
-    'admin@example.com',
-    'scrypt:32768:8:1$feDrzqGrlFNjoTW9$450dd5b7dcbe9d23f39b041bf7683892e7f4fd113fb07bb00f96a1afb3550067eb5c63b89bffd91727fd09f25db2930abf12a2a63b1995dcfdab16abc77c36d5',
-    'admin',
-    NOW()
-);
