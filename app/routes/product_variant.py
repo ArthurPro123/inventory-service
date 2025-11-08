@@ -3,6 +3,11 @@ from app.models.product_variant import ProductVariant
 from app.schemas import ProductVariantSchema
 from app import db
 
+# -----------------------------------------------------------
+from flask_jwt_extended import jwt_required, get_jwt_identity
+# -----------------------------------------------------------
+
+
 bp = Blueprint("product_variant", __name__, url_prefix="/product_variant")
 
 
@@ -19,6 +24,7 @@ def get_product_variant(id):
 
 
 @bp.route("/", methods=["POST"])
+@jwt_required()
 def add_product_variant():
     variant = ProductVariantSchema().load(request.json)
     db.session.add(variant)
@@ -27,6 +33,7 @@ def add_product_variant():
 
 
 @bp.route("/<int:id>", methods=["PUT"])
+@jwt_required()
 def update_product_variant(id):
     variant = ProductVariant.query.get_or_404(id)
     variant = ProductVariantSchema(partial=True).load(request.json, instance=variant)
@@ -35,6 +42,7 @@ def update_product_variant(id):
 
 
 @bp.route("/<int:id>", methods=["DELETE"])
+@jwt_required()
 def delete_product_variant(id):
     variant = ProductVariant.query.get_or_404(id)
     db.session.delete(variant)

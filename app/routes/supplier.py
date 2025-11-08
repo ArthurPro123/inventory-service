@@ -3,6 +3,11 @@ from app.models.supplier import Supplier
 from app.schemas import SupplierSchema
 from app import db
 
+# -----------------------------------------------------------
+from flask_jwt_extended import jwt_required, get_jwt_identity
+# -----------------------------------------------------------
+
+
 bp = Blueprint("supplier", __name__, url_prefix="/supplier")
 
 
@@ -19,6 +24,7 @@ def get_supplier(id):
 
 
 @bp.route("/", methods=["POST"])
+@jwt_required()
 def add_supplier():
     supplier = SupplierSchema().load(request.json)
     db.session.add(supplier)
@@ -27,6 +33,7 @@ def add_supplier():
 
 
 @bp.route("/<int:id>", methods=["PUT"])
+@jwt_required()
 def update_supplier(id):
     supplier = Supplier.query.get_or_404(id)
     supplier = SupplierSchema(partial=True).load(request.json, instance=supplier)
@@ -35,6 +42,7 @@ def update_supplier(id):
 
 
 @bp.route("/<int:id>", methods=["DELETE"])
+@jwt_required()
 def delete_supplier(id):
     supplier = Supplier.query.get_or_404(id)
     db.session.delete(supplier)

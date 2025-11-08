@@ -47,7 +47,9 @@ build: ## Builds services
 .PHONY: run
 run: ## Starts db and app services
 	@echo "Starting services in $(APP_MODE) mode..."
-	$(COMPOSE) up
+	$(COMPOSE) up 
+	# #
+	# $(COMPOSE) up --force-recreate
 
 .PHONY: stop
 stop: ## Stops services
@@ -69,3 +71,9 @@ restart: stop run   ## Restart the stack
 db-logs: 
 	@echo "Getting logs for db"
 	$(COMPOSE) logs db
+
+# #
+.PHONY: build-and-run
+build-and-run:
+	@echo ""
+	$(COMPOSE) up --build
