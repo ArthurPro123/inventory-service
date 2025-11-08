@@ -11,13 +11,9 @@ class Config:
     if DB_HOST in ["db"]:
         SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-    else:  # Use SQLite:
+    else:
 
-        # # Ensure the directory exists (not strictly needed for root dir, but good practice)
-        # db_dir = os.path.dirname(os.path.abspath(DB_NAME))
-        # os.makedirs(db_dir, exist_ok=True)
-
-        # Use SQLite
+        # Use SQLite:
         SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.abspath(DB_NAME)}"
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
