@@ -2,16 +2,20 @@ import os
 
 class Config:
 
-    if os.getenv('DB_HOST') == "db":
+    DB_NAME = os.getenv("DB_NAME", "app.db")
+    DB_USER = os.getenv("DB_USER", "")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+    DB_HOST = os.getenv("DB_HOST", "localhost")
+    DB_PORT = os.getenv("DB_PORT", "")
 
-        # Use MariaDB
-        SQLALCHEMY_DATABASE_URI = (
-            f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@"
-            f"{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
-        )
-    else:
-        # Use SQLite
-        SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.getenv('DB_NAME')}"
+    if DB_HOST in ["db"]:
+        SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+    else:  # Use SQLite:
+
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(os.path.abspath(DB_NAME)), exist_ok=True)
+        SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.abspath(DB_NAME)}"
 
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
