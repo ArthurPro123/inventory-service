@@ -9,6 +9,7 @@ COPY app/          ./app/
 COPY config.py     .
 COPY specs/        ./specs/
 
+COPY app.db        .
 
 EXPOSE 5000
 
