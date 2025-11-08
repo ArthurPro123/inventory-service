@@ -48,4 +48,9 @@ def create_app():
     app.register_blueprint(product_variant.bp)
     app.register_blueprint(inventory.bp)
 
+
+    # Register the openapi route:
+    from app.routes.openapi import init_specs_routes
+    init_specs_routes(app)
+
     return app

@@ -6,7 +6,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/          ./app/
 COPY config.py     .
-COPY openapi.json  .
+COPY specs/        ./specs/
 
 
 # Document the port the container listens on:
