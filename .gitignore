@@ -1,5 +1,7 @@
 # # app.db
 Dockerfile_*
+tests/
+run-tests.sh
 
 venv/
 __pycache__/

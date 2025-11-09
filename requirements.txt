@@ -5,3 +5,4 @@ marshmallow-sqlalchemy
 pymysql
 
 Flask-JWT-Extended
+gunicorn==22.0.0

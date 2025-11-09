@@ -16,4 +16,8 @@ class Config:
         # Use SQLite:
         SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.abspath(DB_NAME)}"
 
+    # # print("SQLALCHEMY_DATABASE_URI: " + SQLALCHEMY_DATABASE_URI)   # show the value
+    # # import sys
+    # # sys.exit()
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
